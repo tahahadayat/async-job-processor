@@ -21,3 +21,8 @@ export type Secret = {
   port: string;
   unsplash_access_key: string;
 };
+
+export type Job = Record<
+  string,
+  { status: "pending" | "resolved" | "rejected"; result: string | null }
+>;
