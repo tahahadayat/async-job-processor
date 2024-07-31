@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "jsonfile";
 import { v4 } from "uuid";
 
-import { Jobs } from "../utils/types";
+import { Jobs, JobDetails, PendingJobDetails } from "../utils/types";
 
 const JOBS_DATA_PATH = "./data/jobs.json";
 
@@ -15,11 +15,21 @@ class JobsStore {
   }
 
   public getAll() {
-    return JobsStore.jobs;
+    return Array.from(JobsStore.jobs).map(([key, _value]) => this.get(key));
   }
 
-  public get(key: string) {
-    return JobsStore.jobs.get(key);
+  public get(key: string): JobDetails | PendingJobDetails | undefined {
+    const job = JobsStore.jobs.get(key);
+    if (job?.status === "pending") {
+      return {
+        id: job.id,
+        status: job.status,
+        startedAt: job.startedAt,
+        endedAt: job.endedAt,
+      } satisfies PendingJobDetails;
+    } else {
+      return job;
+    }
   }
 
   public reset() {
@@ -43,6 +53,7 @@ class JobsStore {
   }
   public createNewPendingJob(key: string = v4()) {
     JobsStore.jobs.set(key, {
+      id: key,
       status: "pending",
       result: null,
       startedAt: new Date(),
@@ -58,6 +69,7 @@ class JobsStore {
       return;
     }
     JobsStore.jobs.set(key, {
+      id: key,
       status: "resolved",
       result: result,
       endedAt: new Date(),
@@ -73,6 +85,7 @@ class JobsStore {
       return;
     }
     JobsStore.jobs.set(key, {
+      id: key,
       status: "rejected",
       result: null,
       endedAt: new Date(),

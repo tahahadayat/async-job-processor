@@ -25,10 +25,13 @@ export type Secret = {
 type JobStatus = "pending" | "resolved" | "rejected";
 
 export type JobDetails = {
+  id: string;
   status: JobStatus;
   startedAt: Date;
   endedAt: Date | null;
   result: string | null;
 };
+
+export type PendingJobDetails = Omit<JobDetails, "result">;
 
 export type Jobs = Map<string, JobDetails>;
