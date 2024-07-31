@@ -9,7 +9,7 @@ const unsplash = createApi({
 class UnsplashService {
   async getRandomFoodPhoto() {
     const response = await unsplash.photos.getRandom({ query: "food" });
-    return (response?.response as Random)?.urls.raw;
+    return response?.response as Random;
   }
 }
 

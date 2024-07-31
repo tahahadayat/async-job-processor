@@ -2,6 +2,7 @@ import { readFile, writeFile } from "jsonfile";
 import { v4 } from "uuid";
 
 import { Jobs, JobDetails, PendingJobDetails } from "../utils/types";
+import { Random } from "unsplash-js/dist/methods/photos/types";
 
 const JOBS_DATA_PATH = "./data/jobs.json";
 
@@ -22,11 +23,10 @@ class JobsStore {
     const job = JobsStore.jobs.get(key);
     if (job?.status === "pending") {
       return {
-        id: job.id,
-        status: job.status,
-        startedAt: job.startedAt,
-        endedAt: job.endedAt,
-      } satisfies PendingJobDetails;
+        ...job,
+        status: "pending",
+        result: null,
+      };
     } else {
       return job;
     }
@@ -63,7 +63,7 @@ class JobsStore {
     return key;
   }
 
-  public resolvePendingJob(key: string, result: string) {
+  public resolvePendingJob(key: string, result: Random) {
     const job = JobsStore.jobs.get(key);
     if (!job?.startedAt || job?.status !== "pending") {
       return;

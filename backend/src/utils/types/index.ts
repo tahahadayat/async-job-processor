@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { Random } from "unsplash-js/dist/methods/photos/types";
 
 type Middleware = (req: Request, res: Response, next: NextFunction) => void;
 
@@ -30,9 +31,12 @@ export type JobDetails = {
   status: JobStatus;
   startedAt: Date;
   endedAt: Date | null;
-  result: string | null;
+  result: Random | null;
 };
 
-export type PendingJobDetails = Omit<JobDetails, "result">;
+export type PendingJobDetails = {
+  status: "pending";
+  result: null;
+} & Pick<JobDetails, "id" | "startedAt" | "endedAt">;
 
 export type Jobs = Map<string, JobDetails>;
