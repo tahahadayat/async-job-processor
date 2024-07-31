@@ -16,7 +16,12 @@ class JobsStore {
   }
 
   public getAll() {
-    return Array.from(JobsStore.jobs).map(([key, _value]) => this.get(key));
+    const jobs = Array.from(JobsStore.jobs);
+    const reversedJobs = jobs.reverse();
+    const reversedJobDetails = reversedJobs.map(([key, _value]) =>
+      this.get(key)
+    );
+    return reversedJobDetails;
   }
 
   public get(key: string): JobDetails | PendingJobDetails | undefined {
