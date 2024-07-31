@@ -22,7 +22,13 @@ export type Secret = {
   unsplash_access_key: string;
 };
 
-export type Job = Record<
-  string,
-  { status: "pending" | "resolved" | "rejected"; result: string | null }
->;
+type JobStatus = "pending" | "resolved" | "rejected";
+
+export type JobDetails = {
+  status: JobStatus;
+  startedAt: Date;
+  endedAt: Date | null;
+  result: string | null;
+};
+
+export type Jobs = Map<string, JobDetails>;
