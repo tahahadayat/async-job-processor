@@ -1,4 +1,5 @@
 import UnsplashService from "./unsplashService";
+import { io } from "..";
 import { jobsStore } from "../stores";
 
 class JobService {
@@ -7,18 +8,21 @@ class JobService {
 
   createJob() {
     const jobId = jobsStore.createNewPendingJob();
-    this.processJob(jobId);
+    this.emitJobToSocketAfterProcess(jobId);
     return jobId;
+  }
+
+  private async emitJobToSocketAfterProcess(jobId: string) {
+    const job = await this.processJob(jobId);
+    io.emit("jobUpdate", { jobId, job });
   }
 
   private async processJob(jobId: string) {
     try {
       const url = await this.getPhotoAfterDelay();
-      jobsStore.resolvePendingJob(jobId, url);
-      return url;
+      return jobsStore.resolvePendingJob(jobId, url);
     } catch (error) {
-      jobsStore.rejectPendingJob(jobId);
-      return error;
+      return jobsStore.rejectPendingJob(jobId);
     }
   }
 

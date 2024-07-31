@@ -1,5 +1,7 @@
 import express, { urlencoded, Request, Response } from "express";
 import cors from "cors";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 import errorHandler from "./middlewares/errorHandler";
 import secrets from "../secrets";
@@ -14,10 +16,18 @@ app.use(urlencoded({ extended: false }));
 app.use(appRoutes);
 app.use(errorHandler);
 
+const server = createServer(app);
+
+export const io = new Server(server, {
+  cors: {
+    origin: secrets.origin,
+  },
+});
+
 app.use("/", (req: Request, res: Response) => {
   res.send(`Healthy`);
 });
 
-app.listen(secrets.port, () => {
+server.listen(secrets.port, () => {
   console.log(`Server started at PORT ${secrets.port}`);
 });

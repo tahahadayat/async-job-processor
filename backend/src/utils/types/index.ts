@@ -20,6 +20,7 @@ export type Route = {
 export type Secret = {
   port: string;
   unsplash_access_key: string;
+  origin: string;
 };
 
 type JobStatus = "pending" | "resolved" | "rejected";

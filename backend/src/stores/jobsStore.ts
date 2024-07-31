@@ -38,7 +38,7 @@ class JobsStore {
 
   public save() {
     try {
-      return writeFile(JOBS_DATA_PATH, JobsStore.jobs);
+      return writeFile(JOBS_DATA_PATH, Object.fromEntries(JobsStore.jobs));
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +76,7 @@ class JobsStore {
       startedAt: job.startedAt,
     });
     this.save();
-    return job;
+    return JobsStore.jobs.get(key);
   }
 
   public rejectPendingJob(key: string) {
@@ -92,7 +92,7 @@ class JobsStore {
       startedAt: job.startedAt,
     });
     this.save();
-    return job;
+    return JobsStore.jobs.get(key);
   }
 }
 

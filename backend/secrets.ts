@@ -12,7 +12,11 @@ const validateEnv = (value: string | undefined, name: string): string => {
 
 const secrets: Secret = {
   port: validateEnv(process.env.PORT, "PORT"),
-  unsplash_access_key: validateEnv(process.env.UNSPLASH_ACCESS_KEY, "UNSPLASH_ACCESS_KEY"),
+  unsplash_access_key: validateEnv(
+    process.env.UNSPLASH_ACCESS_KEY,
+    "UNSPLASH_ACCESS_KEY"
+  ),
+  origin: validateEnv(process.env.ORIGIN, "ORIGIN"),
 };
 
 export default secrets;
