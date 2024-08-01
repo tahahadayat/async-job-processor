@@ -1,11 +1,7 @@
-import "./App.css";
+import JobsTable from "./components/jobsTable/JobsTable";
 
-function App() {
-  return (
-    <>
-      <p>Hello world</p>
-    </>
-  );
-}
+const App = () => {
+  return <JobsTable />;
+};
 
 export default App;

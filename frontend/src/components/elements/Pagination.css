@@ -1,0 +1,63 @@
+.paginated-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 10px 10px;
+  width: fit-content;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.pages-count {
+  margin: 0px 6px;
+  border-radius: 10%;
+  background: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #61A5FA;
+  color: #61A5FA;
+}
+
+.pages-count:hover {
+  background-color: #61A5FA;
+  color: white;
+  cursor: pointer;
+}
+
+.ative-page {
+  background-color: #61A5FA;
+  color: white;
+}
+
+.next-pre-btn {
+  font-size: 17px;
+  border-radius: 10%;
+  background: rgb(228, 228, 228);
+  width: 40px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 3px;
+}
+
+
+.pages-count>a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.next-pre-btn>a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
