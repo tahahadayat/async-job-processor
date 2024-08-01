@@ -131,3 +131,8 @@ Total time spent: Approximately 10~12 hours
 - Improve error handling and add more comprehensive logging
 - Implement unit and integration tests
 - Add ability to cancel or pause ongoing tasks
+
+## User Interface Preview
+
+![sample](https://github.com/user-attachments/assets/d3572d2c-8ae4-4b51-9c89-a28810bdc441)
+
