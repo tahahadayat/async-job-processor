@@ -10,6 +10,9 @@ class JobService {
   createJob() {
     const jobId = jobsStore.createNewPendingJob();
     this.emitJobToSocketAfterProcess(jobId);
+    io.emit("jobCreate", {
+      jobId,
+    });
     return jobId;
   }
 
