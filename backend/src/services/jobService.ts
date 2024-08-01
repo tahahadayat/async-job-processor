@@ -5,7 +5,7 @@ import { Random } from "unsplash-js/dist/methods/photos/types";
 
 class JobService {
   private STEP: number = 5;
-  private MAX_DELAY_IN_SECONDS: number = 30;
+  private MAX_DELAY_IN_SECONDS: number = 300;
 
   createJob() {
     const jobId = jobsStore.createNewPendingJob();
