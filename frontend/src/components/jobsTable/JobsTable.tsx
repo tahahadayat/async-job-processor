@@ -48,7 +48,7 @@ const JobsTable = () => {
       id: jobId,
       status: "pending",
       result: null,
-      startedAt: formatDate(new Date().toLocaleString()),
+      startedAt: formatDate(new Date().toISOString()),
       endedAt: "",
     });
   };
